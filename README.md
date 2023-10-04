@@ -25,7 +25,7 @@ Methods:
 - addCustomerTransaction(branch: Branch, customerId: string, amount: number): boolean
   Description: Adds a transaction of the amount for the customer with the specified customerId in the given branch.
   
-- findBranchByName(branchName: string): Branch[] | null
+- ddCustomerTransaction(branchName: string): Branch[] | null
   Description: Returns a list of matched branches with the specified branchName or null if no matches were found.
   
 - checkBranch(branch: Branch): boolean
@@ -112,9 +112,9 @@ arizonaBank.addCustomer(westBranch, customer3)
 arizonaBank.addCustomer(sunBranch, customer1)
 arizonaBank.addCustomer(sunBranch, customer2)
 
-arizonaBank.addCustomerTransaction(westBranch, customer1.getId, 3000)
-arizonaBank.addCustomerTransaction(westBranch, customer1.getId, 2000)
-arizonaBank.addCustomerTransaction(westBranch, customer2.getId, 3000)
+arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000)
+arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 2000)
+arizonaBank.addCustomerTransaction(westBranch, customer2.getId(), 3000)
 
 customer1.addTransactions(-1000)
 console.log(customer1.getBalance())
