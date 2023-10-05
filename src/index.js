@@ -8,44 +8,37 @@ class Bank {
 
     addBranch(branch){
 
-        if ( !this.branches.includes(branch)) {
+        if( !this.branches.includes(branch)) {
             this.branches.push(branch);
             return true;
-        }else{
-            return false;
         }
+            return false;
+        
     }  
 
     addCustomer(branch , customer){
-        if ( !this.branch.includes(customer) ){
-            this.customers.push(branch);
-            return true;
-        }else{
+        if (!this.branches.includes(branch) ){
+          return  this.addCustomer.push(customer);
+          }
             return false;
-        }
+        
     }
- // not sure about this >_<
+
     addCustomerTransaction(branch , customerId ,amount ){
         
-        const Transaction = this.Transaction.find(
-            customer => customer.id === customerId);
-
-        if (Transaction) {
-            Customer.push(branch);
-          }  else {
+            if (this.branches.includes(branch)) {
+              return branch.addCustomerTransaction(customerId, amount);
+            }
             return false;
           }
     
-    }
-
-    // was not clear have the same name as  appove 
-    //so i changed it to the old naming
+    
+   
     findBranchByName(branchName ){
-       const BranchByName = this.branches.filter(Branch => Branch.name === branchName);
-       if(BranchByName){
-        return true;
-       } else null;
-}
+       const BranchByName = this.branches.find((branch) => branch.length > 0)
+        
+       }
+
   
     checkBranch(branch){
         if (this.name.includes(Branch) ){
@@ -57,12 +50,20 @@ class Bank {
     }
     listCustomers(branch,includeTransactions){
 
-    if (transaction){//mop?//
-        
-    };
-    }
+        if (this.branches.includes(branch)) {
+            const customers = branch.getCustomers();
+            console.log(`Customers of ${branch.name}:`);
+            customers.forEach((customer) => {
+              console.log(`Customer: ${customer.name}`);
+              if (includeTransactions) {
+                console.log(`Transactions: ${JSON.stringify(customer.getTransactions())}`);
+              }
+            });
+          } else {
+            console.log(`Branch '${branch.name}' not found.`);
+          }
 
-}
+}}
 
 
 class Branch{
@@ -91,15 +92,15 @@ class Branch{
 }
     addCustomerTransaction(customerId, amount) {
         const customer = this.customers.find(
-            customer => customer.id === customerId);
+            customer => customer.getId === customerId);
 
         if (customer) {
-            customer.addTransaction(amount);
-          }  else {
-            return false;
+           return  customer.addTransaction(amount);
+          }  else 
+            false;
           }
     }
-}
+
 
 
 class Customer{
@@ -127,17 +128,17 @@ class Customer{
             );
 
     }
-    addTransactions(amount){
+    addTransaction(amount){
 
-        if (amount < 0){
-            console.log('can not be negative');
-            return false;
-        }
+        if (amount >= 0){
         const transaction = new Transaction(amount , new Date());
         this.transactions.push(transaction);
         return true;
-    }
+    } 
+    return false;
+ }
 }
+
 
 
 class Transaction{
@@ -146,3 +147,32 @@ class Transaction{
         this.date=date;
     }
 }
+
+
+const arizonaBank = new Bank("Arizona")
+const westBranch = new Branch("West Branch")
+const sunBranch = new Branch("Sun Branch")
+const customer1 = new Customer("John", 1)
+const customer2 = new Customer("Anna", 2)
+const customer3 = new Customer("John", 3)
+
+arizonaBank.addBranch(westBranch)
+arizonaBank.addBranch(sunBranch)
+arizonaBank.addBranch(westBranch) 
+
+arizonaBank.findBranchByName("bank")
+arizonaBank.findBranchByName("sun")
+
+arizonaBank.addCustomer(westBranch, customer1)
+arizonaBank.addCustomer(westBranch, customer3)
+arizonaBank.addCustomer(sunBranch, customer1)
+arizonaBank.addCustomer(sunBranch, customer2)
+
+arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000)
+arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 2000)
+arizonaBank.addCustomerTransaction(westBranch, customer2.getId(), 3000)
+
+customer1.addTransaction(-1000)
+console.log(customer1.getBalance())
+console.log(arizonaBank.listCustomers(westBranch, true))
+console.log(arizonaBank.listCustomers(sunBranch,true))
