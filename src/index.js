@@ -131,11 +131,12 @@ class Customer{
     addTransaction(amount){
 
         if (amount >= 0){
-        const transaction = new Transaction(amount , new Date());
+        let transaction = new Transaction(amount , new Date());
         this.transactions.push(transaction);
         return true;
     } 
-    return false;
+    return false; 
+    console.log('can not be negative')
  }
 }
 
@@ -143,8 +144,8 @@ class Customer{
 
 class Transaction{
     Constructor (amount ,date){
-        this.amount=amount;
-        this.date=date;
+        this.amount = amount;
+        this.date = new Date();
     }
 }
 
