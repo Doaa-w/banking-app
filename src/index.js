@@ -1,179 +1,125 @@
-
-class Bank {
-    
-    constructor(name){
-        this.name = name;
-        this.branches = [];
+var Transaction = /** @class */ (function () {
+    function Transaction() {
     }
-
-    addBranch(branch){
-
-        if( !this.branches.includes(branch)) {
-            this.branches.push(branch);
-            return true;
-        }
-            return false;
-        
-    }  
-
-    addCustomer(branch , customer){
-        if (!this.branches.includes(branch) ){
-          return  this.addCustomer.push(customer);
-          }
-            return false;
-        
-    }
-
-    addCustomerTransaction(branch , customerId ,amount ){
-        
-            if (this.branches.includes(branch)) {
-              return branch.addCustomerTransaction(customerId, amount);
-            }
-            return false;
-          }
-    
-    
-   
-    findBranchByName(branchName ){
-       const BranchByName = this.branches.find((branch) => branch.length > 0)
-        
-       }
-
-  
-    checkBranch(branch){
-        if (this.name.includes(Branch) ){
-            return true;
-
-        } else {
-            return false;
-        }
-    }
-    listCustomers(branch,includeTransactions){
-
-        if (this.branches.includes(branch)) {
-            const customers = branch.getCustomers();
-            console.log(`Customers of ${branch.name}:`);
-            customers.forEach((customer) => {
-              console.log(`Customer: ${customer.name}`);
-              if (includeTransactions) {
-                console.log(`Transactions: ${JSON.stringify(customer.getTransactions())}`);
-              }
-            });
-          } else {
-            console.log(`Branch '${branch.name}' not found.`);
-          }
-
-}}
-
-
-class Branch{
-    constructor(name){
-        this.name = name;
-        this.customers = [];
-    }
-
-    getName(){
-        return this.name;
-    }
-
-    getCustomers(){
-        return this.customers;
-    }
-
-    addCustomer(customer){
-       
-        if ( !this.customers.includes(customer) ){
-            this.customers.push(customer);
-            return true;
-        }else{
-            return false;
-        }
-    
-}
-    addCustomerTransaction(customerId, amount) {
-        const customer = this.customers.find(
-            customer => customer.getId === customerId);
-
-        if (customer) {
-           return  customer.addTransaction(amount);
-          }  else 
-            false;
-          }
-    }
-
-
-
-class Customer{
-    constructor(name , id){
+    Transaction.prototype.Constructor = function (amount, date) {
+        this.amount = amount;
+        this.date = new Date();
+    };
+    return Transaction;
+}());
+var Customer = /** @class */ (function () {
+    function Customer(name, id) {
         this.name = name;
         this.id = id;
         this.transactions = [];
     }
-
-    getName(){
+    Customer.prototype.getName = function () {
         return this.name;
-    }
-
-    getId(){
+    };
+    Customer.prototype.getId = function () {
         return this.id;
-    }
-
-    getTransactions(){
+    };
+    Customer.prototype.getTransactions = function () {
         return this.transactions;
+    };
+    Customer.prototype.getBalance = function () {
+        return this.transactions.reduce(function (total, current) { return total + current.amount; }, 0);
+    };
+    Customer.prototype.addTransaction = function (amount) {
+        amount: Number;
+        Date: Date;
+        if (amount < 0) {
+            console.log('can not be negative');
+            return false;
+        }
+        else {
+            var transaction = new Transaction(amount, new data());
+            this.transactions.push(transaction);
+            return true;
+        }
+    };
+    return Customer;
+}());
+var Branch = /** @class */ (function () {
+    function Branch(name) {
+        this.name = name;
+        this.customers = [];
     }
-    getBalance(){
-
-        return this.transactions.reduce(
-            (total, current) => total + current.amount,0
-            );
-
+    Branch.prototype.getName = function () {
+        return this.name;
+    };
+    Branch.prototype.getCustomers = function () {
+        return this.customers;
+    };
+    Branch.prototype.addCustomer = function (customer) {
+        if (!this.customers.includes(customer)) {
+            this.customers.push(customer);
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    Branch.prototype.addCustomerTransaction = function (customerId, amount) {
+        var customer = this.customers.find(function (customer) { return customer.getId === customerId; });
+        if (customer) {
+            return customer.addTransaction(amount);
+        }
+        else
+            false;
+    };
+    return Branch;
+}());
+var Bank = /** @class */ (function () {
+    function Bank(name) {
+        this.name = name;
+        this.branches = [];
     }
-    addTransaction(amount){
-
-        if (amount >= 0){
-        let transaction = new Transaction(amount , new Date());
-        this.transactions.push(transaction);
-        return true;
-    } 
-    return false; 
-    console.log('can not be negative')
- }
-}
-
-
-
-class Transaction{
-    Constructor (amount ,date){
-        this.amount = amount;
-        this.date = new Date();
-    }
-}
-
-
-const arizonaBank = new Bank("Arizona")
-const westBranch = new Branch("West Branch")
-const sunBranch = new Branch("Sun Branch")
-const customer1 = new Customer("John", 1)
-const customer2 = new Customer("Anna", 2)
-const customer3 = new Customer("John", 3)
-
-arizonaBank.addBranch(westBranch)
-arizonaBank.addBranch(sunBranch)
-arizonaBank.addBranch(westBranch) 
-
-arizonaBank.findBranchByName("bank")
-arizonaBank.findBranchByName("sun")
-
-arizonaBank.addCustomer(westBranch, customer1)
-arizonaBank.addCustomer(westBranch, customer3)
-arizonaBank.addCustomer(sunBranch, customer1)
-arizonaBank.addCustomer(sunBranch, customer2)
-
-arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000)
-arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 2000)
-arizonaBank.addCustomerTransaction(westBranch, customer2.getId(), 3000)
-
-customer1.addTransaction(-1000)
-console.log(customer1.getBalance())
-console.log(arizonaBank.listCustomers(westBranch, true))
-console.log(arizonaBank.listCustomers(sunBranch,true))
+    Bank.prototype.addBranch = function (branch) {
+        if (!this.branches.includes(branch)) {
+            this.branches.push(branch);
+            return true;
+        }
+        return false;
+    };
+    Bank.prototype.addCustomer = function (branch, customer) {
+        if (!this.branches.includes(branch)) {
+            return this.addCustomer.push(customer);
+        }
+        return false;
+    };
+    Bank.prototype.addCustomerTransaction = function (branch, customerId, amount) {
+        if (this.branches.includes(branch)) {
+            return branch.addCustomerTransaction(customerId, amount);
+        }
+        return false;
+    };
+    Bank.prototype.findBranchByName = function (branchName) {
+        var BranchByName = this.branches.find(function (branch) { return branch.length > 0; });
+    };
+    Bank.prototype.checkBranch = function (Branch) {
+        Branch: Branch;
+        if (this.name.includes(Branch)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    Bank.prototype.listCustomers = function (Branch, Transactions) {
+        if (this.branches.includes(Branch)) {
+            var Customers = Branch.getCustomers();
+            console.log("Customers of ".concat(Branch.name, ":"));
+            Customers.forEach(function (customer) {
+                console.log("Customer: ".concat(customer.name));
+                if (Transaction) {
+                    console.log("Transactions: ".concat(JSON.stringify(customer.getTransactions())));
+                }
+            });
+        }
+        else {
+            console.log("Branch '".concat(Branch.name, "' not found."));
+        }
+    };
+    return Bank;
+}());
