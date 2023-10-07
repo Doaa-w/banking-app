@@ -1,15 +1,16 @@
+import { type } from "os";
 
 class Transaction{
-     amount: Number; 
-      date: Date;
-    Constructor( amount:Number , date:Date ){
+     amount!: number; 
+      date!: Date;
+    Constructor( amount:number , date:Date ){
         this.amount = amount;
         this.date = new Date();
     }
 }
 
 class Customer{
-    name:String;
+    name:string;
     id:number;
     transactions:Transaction[];
     constructor(name:string , id:number){
@@ -37,13 +38,13 @@ class Customer{
     }
     addTransaction(amount:number){
       
-        amount:Number;
-         Date:Date;
         if (amount < 0){
             console.log('can not be negative');
     return false; 
         }else{ 
-    const transaction = new Transaction (amount ,new data());
+          amount:Number;
+          date:Date;
+    const transaction = new Transaction (amount,new data());
     this.transactions.push(transaction);
     return true;
  }
@@ -112,7 +113,7 @@ class Branch{
         
     }
 
-    addCustomerTransaction(branch:Branch , customerId:Number ,amount:Number ){
+    addCustomerTransaction(branch:Branch , customerId:number ,amount:number ){
             if (this.branches.includes(branch)) {
               return branch.addCustomerTransaction(customerId, amount);
             }
@@ -133,7 +134,7 @@ class Branch{
   
     checkBranch(Branch:Branch ) {
 
-        if (this.Branch.includes(Branch)){
+        if (this.branch.includes(Branch)){
             return true;
         } else {
             return false;

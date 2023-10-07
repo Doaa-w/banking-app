@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Transaction = /** @class */ (function () {
     function Transaction() {
     }
@@ -26,13 +28,13 @@ var Customer = /** @class */ (function () {
         return this.transactions.reduce(function (total, current) { return total + current.amount; }, 0);
     };
     Customer.prototype.addTransaction = function (amount) {
-        amount: Number;
-        Date: Date;
         if (amount < 0) {
             console.log('can not be negative');
             return false;
         }
         else {
+            amount: Number;
+            date: Date;
             var transaction = new Transaction(amount, new data());
             this.transactions.push(transaction);
             return true;
@@ -101,7 +103,7 @@ var Bank = /** @class */ (function () {
         }
     };
     Bank.prototype.checkBranch = function (Branch) {
-        if (this.Branch.includes(Branch)) {
+        if (this.branch.includes(Branch)) {
             return true;
         }
         else {
