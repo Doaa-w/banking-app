@@ -1,7 +1,7 @@
 
 class Transaction{
-     amount:Number; 
-      date:Date;
+     amount: Number; 
+      date: Date;
     Constructor( amount:Number , date:Date ){
         this.amount = amount;
         this.date = new Date();
@@ -32,7 +32,7 @@ class Customer{
     getBalance(){
         
         return this.transactions.reduce(
-            (total, current) => total + current.amount ,0);
+            (total, current) => total+current.amount ,0);
 
     }
     addTransaction(amount:number){
@@ -77,12 +77,12 @@ class Branch{
 }
     addCustomerTransaction(customerId :number, amount:number) {
         const customer = this.customers.find(
-            customer => customer.getId === customerId);
+            customer => customer.getId() === customerId);
 
         if (customer) {
            return  customer.addTransaction(amount);
           }  else 
-            false;
+           return false;
           }
         }
 
@@ -123,15 +123,17 @@ class Branch{
    
     findBranchByName(branchName:Branch ){
 
-       const BranchByName = this.branches.find((branch) => branch.length > 0)
+       const BranchByName = this.branches.find(branch => branch.getName()== branchName);
+       if (Branch){
+        return Branch
+       }
         
        }
 
   
     checkBranch(Branch:Branch ) {
-        Branch:Branch;
 
-        if (this.name.includes(Branch) ){
+        if (this.Branch.includes(Branch)){
             return true;
         } else {
             return false;

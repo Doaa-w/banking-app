@@ -61,12 +61,12 @@ var Branch = /** @class */ (function () {
         }
     };
     Branch.prototype.addCustomerTransaction = function (customerId, amount) {
-        var customer = this.customers.find(function (customer) { return customer.getId === customerId; });
+        var customer = this.customers.find(function (customer) { return customer.getId() === customerId; });
         if (customer) {
             return customer.addTransaction(amount);
         }
         else
-            false;
+            return false;
     };
     return Branch;
 }());
@@ -95,11 +95,13 @@ var Bank = /** @class */ (function () {
         return false;
     };
     Bank.prototype.findBranchByName = function (branchName) {
-        var BranchByName = this.branches.find(function (branch) { return branch.length > 0; });
+        var BranchByName = this.branches.find(function (branch) { return branch.getName() == branchName; });
+        if (Branch) {
+            return Branch;
+        }
     };
     Bank.prototype.checkBranch = function (Branch) {
-        Branch: Branch;
-        if (this.name.includes(Branch)) {
+        if (this.Branch.includes(Branch)) {
             return true;
         }
         else {
