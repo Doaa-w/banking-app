@@ -98,7 +98,7 @@ var Bank = /** @class */ (function () {
         return this.branches.find(function (branch) { return branch.name === branchName; }) || null;
     };
     Bank.prototype.checkBranch = function (Branch) {
-        if (this.Branch.includes(Branch)) {
+        if (this.branches.includes(Branch)) {
             return true;
         }
         else {

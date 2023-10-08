@@ -90,7 +90,7 @@ class Branch{
     class Bank {
     name:String; 
     branches:Branch[];
-    constructor(name:String){
+    constructor(name:String ){
         this.name = name;
         this.branches = [];
     }
@@ -132,7 +132,7 @@ class Branch{
   
     checkBranch(Branch:Branch ) :boolean {
 
-        if (this.Branch.includes(Branch)){
+        if (this.branches.includes(Branch)){
             return true;
         } else {
             return false;
