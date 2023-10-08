@@ -1,9 +1,9 @@
 import { type } from "os";
 
 class Transaction{
-     amount!: number; 
-      date!: Date;
-    Constructor( amount:number , date:Date ){
+     amount: number; 
+      date: Date;
+    Constructor( amount:number, data:Date){
         this.amount = amount;
         this.date = new Date();
     }
@@ -19,21 +19,21 @@ class Customer{
         this.transactions = [];
     }
 
-    getName(){
+    getName():string{
         return this.name;
     }
 
-    getId(){
+    getId():number{
         return this.id;
     }
 
-    getTransactions(){
+    getTransactions() :Transaction[] {
         return this.transactions;
     }
-    getBalance(){
+    getBalance():number{
         
         return this.transactions.reduce(
-            (total, current) => total+current.amount ,0);
+            (total, current):number => total+current.amount ,0);
 
     }
     addTransaction(amount:number){
@@ -44,7 +44,7 @@ class Customer{
         }else{ 
           amount:Number;
           date:Date;
-    const transaction = new Transaction (amount,new data());
+    let transaction= new Transaction (amount,new data());
     this.transactions.push(transaction);
     return true;
  }
@@ -105,7 +105,7 @@ class Branch{
         
     }  
 
-    addCustomer(branch:Branch , customer:Customer){
+    addCustomer(branch:Branch , customer:Customer):string|boolean{
         if (!this.branches.includes(branch) ){
           return  this.addCustomer.push(customer);
           }
@@ -122,19 +122,17 @@ class Branch{
     
     
    
-    findBranchByName(branchName:Branch ){
+    findBranchByName(branchName:string ):Branch| null{
 
-       const BranchByName = this.branches.find(branch => branch.getName()== branchName);
-       if (Branch){
-        return Branch
-       }
+      
+       return this.branches.find((branch) => branch.name === branchName)||null;
         
        }
 
   
-    checkBranch(Branch:Branch ) {
+    checkBranch(Branch:Branch ) :boolean {
 
-        if (this.branch.includes(Branch)){
+        if (this.Branch.includes(Branch)){
             return true;
         } else {
             return false;
@@ -157,3 +155,4 @@ class Branch{
 
 }
 }
+

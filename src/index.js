@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Transaction = /** @class */ (function () {
     function Transaction() {
     }
-    Transaction.prototype.Constructor = function (amount, date) {
+    Transaction.prototype.Constructor = function (amount, data) {
         this.amount = amount;
         this.date = new Date();
     };
@@ -97,13 +97,10 @@ var Bank = /** @class */ (function () {
         return false;
     };
     Bank.prototype.findBranchByName = function (branchName) {
-        var BranchByName = this.branches.find(function (branch) { return branch.getName() == branchName; });
-        if (Branch) {
-            return Branch;
-        }
+        return this.branches.find(function (branch) { return branch.name === branchName; }) || null;
     };
     Bank.prototype.checkBranch = function (Branch) {
-        if (this.branch.includes(Branch)) {
+        if (this.Branch.includes(Branch)) {
             return true;
         }
         else {
