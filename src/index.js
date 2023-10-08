@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var Transaction = /** @class */ (function () {
-    function Transaction(amount, data) {
+    function Transaction(amount, date) {
         this.amount = amount;
         this.date = new Date();
     }
@@ -84,7 +82,7 @@ var Bank = /** @class */ (function () {
     };
     Bank.prototype.addCustomer = function (branch, customer) {
         if (!this.branches.includes(branch)) {
-            return this.addCustomer.push(customer);
+            return branch.addCustomer(customer);
         }
         return false;
     };
@@ -105,7 +103,7 @@ var Bank = /** @class */ (function () {
             return false;
         }
     };
-    Bank.prototype.listCustomers = function (Branch, Transactions) {
+    Bank.prototype.listCustomers = function (Branch, Transaction) {
         if (this.branches.includes(Branch)) {
             var Customers = Branch.getCustomers();
             console.log("Customers of ".concat(Branch.name, ":"));

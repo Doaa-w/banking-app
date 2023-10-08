@@ -1,9 +1,9 @@
-import { type } from "os";
+
 
 class Transaction{
      amount: number; 
       date: Date;
-    constructor( amount:number, data:Date){
+    constructor( amount:number, date:Date){
         this.amount = amount;
         this.date = new Date();
     }
@@ -105,9 +105,9 @@ class Branch{
         
     }  
 
-    addCustomer(branch:Branch , customer:Customer):Branch|Customer|boolean {
+    addCustomer(branch:Branch , customer:Customer) {
         if (!this.branches.includes(branch) ){
-          return  this.addCustomer.push(customer);
+          return  branch.addCustomer(customer);
           }
             return false;
         
@@ -138,7 +138,7 @@ class Branch{
             return false;
         }
     }
-    listCustomers(Branch:Branch,Transactions:Transaction){
+    listCustomers(Branch:Branch, Transaction:boolean) {
    
         if (this.branches.includes(Branch)) {
             const Customers= Branch.getCustomers();
