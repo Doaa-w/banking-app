@@ -1,12 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Transaction = /** @class */ (function () {
-    function Transaction() {
-    }
-    Transaction.prototype.Constructor = function (amount, data) {
+    function Transaction(amount, data) {
         this.amount = amount;
         this.date = new Date();
-    };
+    }
     return Transaction;
 }());
 var Customer = /** @class */ (function () {

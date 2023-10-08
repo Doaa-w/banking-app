@@ -3,7 +3,7 @@ import { type } from "os";
 class Transaction{
      amount: number; 
       date: Date;
-    Constructor( amount:number, data:Date){
+    constructor( amount:number, data:Date){
         this.amount = amount;
         this.date = new Date();
     }
