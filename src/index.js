@@ -33,7 +33,7 @@ var Customer = /** @class */ (function () {
         else {
             amount: Number;
             date: Date;
-            var transaction = new Transaction(amount, new data());
+            var transaction = new Transaction(amount, new Date());
             this.transactions.push(transaction);
             return true;
         }

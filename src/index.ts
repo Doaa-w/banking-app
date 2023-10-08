@@ -44,7 +44,7 @@ class Customer{
         }else{ 
           amount:Number;
           date:Date;
-    let transaction= new Transaction (amount,new data());
+    let transaction= new Transaction (amount,new  Date());
     this.transactions.push(transaction);
     return true;
  }
@@ -105,7 +105,7 @@ class Branch{
         
     }  
 
-    addCustomer(branch:Branch , customer:Customer):string|boolean{
+    addCustomer(branch:Branch , customer:Customer):Branch|Customer|boolean {
         if (!this.branches.includes(branch) ){
           return  this.addCustomer.push(customer);
           }
